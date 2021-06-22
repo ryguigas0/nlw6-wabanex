@@ -19,5 +19,4 @@ defmodule WabanexWeb.IMCController do
     |>  json(result)
   end
 
-
 end

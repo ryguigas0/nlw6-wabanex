@@ -27,3 +27,5 @@
 3. Then `sudo -u postgres psql`
 4. And finally: `\password` to set a new password
 5. type the new password on the config files
+
+### Needing documentation offline? Try on iex: `h h`

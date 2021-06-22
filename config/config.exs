@@ -12,7 +12,11 @@ config :wabanex,
 
 config :wabanex, Wabanex.Repo,
   username: "postgres",
-  password: "postgres"
+  password: "postgres",
+
+  # Makes ecto work with uuid instead of ID
+  migration_primary_key: [type: :binary_id],
+  migration_foreign_key: [type: :binary_id]
 
 
 # Configures the endpoint

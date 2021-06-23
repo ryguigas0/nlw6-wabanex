@@ -4,8 +4,8 @@
 ## Stack
 - Elixir
 - Phoenix
-- GraphQL
-- PostgreSQL
+- GraphQL (absinthe)
+- PostgreSQL (postgrex)
 
 ## Folder structure
 - `lib` -> The code
@@ -20,6 +20,7 @@
 3. `mix ecto.setup`
 4. `mix phx.server`
 5. go to `http://localhost:4000/api?filename=students.csv`
+- `http://localhost:4000/api/graphiql/` to use graphiql
 
 ## Problems with postgresql authentication on wsl2?
 1. Check if the service has started: `service postgresql status`

@@ -9,6 +9,15 @@ defmodule WabanexWeb.Router do
     pipe_through :api
 
     get "/", IMCController, :index
+
+  end
+
+  scope "/api" do
+    pipe_through :api
+
+    forward "/graphql", Absinthe.Plug, schema: WabanexWeb.Schema
+    forward "/graphiql", Absinthe.Plug.GraphiQL, schema: WabanexWeb.Schema # GraphQL client for testing
+
   end
 
   # Enables LiveDashboard only for development

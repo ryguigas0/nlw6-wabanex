@@ -2,9 +2,19 @@
 defmodule WabanexWeb.Schema.Types.Root do
   use Absinthe.Schema.Notation
 
-  alias WabanexWeb.Resolvers.User, as: UserResolver
+  alias WabanexWeb.{Schema, Resolvers}
 
-  import_types WabanexWeb.Schema.Types.User # import custom types
+  alias Crudry.Middlewares.TranslateErrors
+
+  alias Schema.Types
+
+  alias Resolvers.User, as: UserResolver
+  alias Resolvers.Training, as: TrainingResolver
+
+  # types imported here are imported everywhere
+  import_types Types.Custom.UUID4  # import custom types
+  import_types(Types.User)
+  import_types(Types.Training)
 
   object :root_query do
     field :get_user, type: :user do # "get route"
@@ -21,6 +31,13 @@ defmodule WabanexWeb.Schema.Types.Root do
       arg :input, non_null(:create_user_input) # needs an input to create an user
 
       resolve &UserResolver.create/2
+      middleware TranslateErrors # Error translation middleware
+    end
+    field :create_training, type: :training do
+      arg :input, non_null(:create_training_input) # needs an input to create an user
+
+      resolve &TrainingResolver.create/2
+      middleware TranslateErrors # Error translation middleware
     end
   end
 end

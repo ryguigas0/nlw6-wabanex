@@ -39,6 +39,7 @@ defmodule Wabanex.MixProject do
       {:postgrex, ">= 0.0.0"},
       {:absinthe, "~> 1.5.0"},
       {:absinthe_plug, "~> 1.5"},
+      {:crudry, "~> 2.4.0"},
       {:phoenix_live_dashboard, "~> 0.4"},
       {:telemetry_metrics, "~> 0.4"},
       {:telemetry_poller, "~> 0.4"},

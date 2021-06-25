@@ -1,22 +1,24 @@
 # Defining the User schema (data model and casting) module
-defmodule Wabanex.User do
+defmodule Wabanex.Training do
   use Ecto.Schema
   import Ecto.Changeset # Validating data updates
 
-  alias Wabanex.Training
+  alias Wabanex.{Exercise, User}
 
   # Ecto, the id column in this table is binary_id and autogenerates
   @primary_key {:id, :binary_id, autogenerate: true}
+  @foreign_key_type :binary_id
 
   # Creates an module constant
-  @fields [:email, :password, :name]
+  @fields [:start_date, :end_date, :user_id]
 
-  schema "users" do
-    field :email, :string # Any value -> cast as string
-    field :name, :string
-    field :password, :string
+  schema "trainings" do
 
-    has_one :training, Training
+    field :start_date, :date
+    field :end_date, :date
+
+    belongs_to :user, User # One User has many trainings
+    has_many :exercises, Exercise # One training has many exercises
 
     timestamps()
   end
@@ -26,9 +28,6 @@ defmodule Wabanex.User do
     %__MODULE__{} # __MODULE__ === Wabanex.User
     |> cast(params, @fields) # casts the values according to the fields
     |> validate_required(@fields) # all the fields in the list are required
-    |> validate_length(:password, min: 8) # this field needs to be at least 8 chracters
-    |> validate_length(:name, min: 2) # this field needs to be at least 2 chracters
-    |> validate_format(:email, ~r/@/) # this field needs to fulfill the regex (have a @)
-    |> unique_constraint([:email]) # is this data unique in the database?
+    |> cast_assoc(:exercises)
   end
 end

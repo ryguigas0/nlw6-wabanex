@@ -25,10 +25,10 @@ defmodule Wabanex.Training do
     timestamps()
   end
 
-  # Parse, validate the data and create a user
-  def changeset(params) do
+  # Parse, validate the data and create a training
+  def changeset(params, data \\ %Wabanex.Training{}) do
     # __MODULE__ === Wabanex.User
-    %__MODULE__{}
+    data
     # casts the values according to the fields
     |> cast(params, @fields)
     # all the fields in the list are required

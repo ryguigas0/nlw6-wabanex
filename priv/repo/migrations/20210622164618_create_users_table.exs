@@ -13,6 +13,14 @@ defmodule Wabanex.Repo.Migrations.CreateUsersTable do
       timestamps()
     end
 
+    # Does not need to wipe the db, just migrate
+    alter table(:users) do
+      add :weight, :float
+      add :height, :float
+      add :fat_index, :float
+      add :muscle_index, :float
+    end
+
     # the email column of users contains only unique values
     create unique_index(:users, [:email])
   end

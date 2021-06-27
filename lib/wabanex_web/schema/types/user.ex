@@ -10,6 +10,10 @@ defmodule WabanexWeb.Schema.Types.User do
     field :email, non_null(:string)
     # Password cannot be accesible on the API
     field :trainings, list_of(:training)
+    field :weight, :float
+    field :height, :float
+    field :fat_index, :float
+    field :muscle_index, :float
   end
 
   # Description
@@ -18,5 +22,9 @@ defmodule WabanexWeb.Schema.Types.User do
     field :name, non_null(:string), description: "Users name"
     field :email, non_null(:string), description: "Users email"
     field :password, non_null(:string), description: "Users password"
+    field :weight, :float
+    field :height, :float
+    field :fat_index, :float
+    field :muscle_index, :float
   end
 end

@@ -10,13 +10,18 @@ defmodule Wabanex.User do
   @primary_key {:id, :binary_id, autogenerate: true}
 
   # Creates an module constant
-  @fields [:email, :password, :name]
+  @fields [:email, :password, :name, :weight, :height, :fat_index, :muscle_index]
+  @required_fields [:email, :password, :name]
 
   schema "users" do
     # Any value -> cast as string
     field :email, :string
     field :name, :string
     field :password, :string
+    field :weight, :float
+    field :height, :float
+    field :fat_index, :float
+    field :muscle_index, :float
 
     has_many :trainings, Training
 
@@ -30,13 +35,17 @@ defmodule Wabanex.User do
     # casts the values according to the fields
     |> cast(params, @fields)
     # all the fields in the list are required
-    |> validate_required(@fields)
+    |> validate_required(@required_fields)
     # this field needs to be at least 8 chracters
     |> validate_length(:password, min: 8)
     # this field needs to be at least 2 chracters
     |> validate_length(:name, min: 2)
     # this field needs to fulfill the regex (have a @)
     |> validate_format(:email, ~r/@/)
+    |> validate_number(:fat_index, greater_than_or_equal_to: 0.01, less_than_or_equal_to: 1)
+    |> validate_number(:muscle_index, greater_than_or_equal_to: 0.01, less_than_or_equal_to: 1)
+    |> validate_number(:height, not_equal_to: 0)
+    |> validate_number(:weight, not_equal_to: 0)
     # is this data unique in the database?
     |> unique_constraint([:email])
   end

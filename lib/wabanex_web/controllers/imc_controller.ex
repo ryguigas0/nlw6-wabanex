@@ -1,5 +1,6 @@
 defmodule WabanexWeb.IMCController do
-  use WabanexWeb, :controller # This is a controller now
+  # This is a controller now
+  use WabanexWeb, :controller
 
   alias Wabanex.IMC
 
@@ -16,7 +17,6 @@ defmodule WabanexWeb.IMCController do
   defp render_response(conn, status, result) do
     conn
     |> put_status(status)
-    |>  json(result)
+    |> json(result)
   end
-
 end

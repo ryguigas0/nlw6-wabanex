@@ -9,12 +9,14 @@ defmodule Wabanex.Repo.Migrations.CreateUsersTable do
       add :name, :string
       add :password, :string
 
-      timestamps() # When was this created/changed?
+      # When was this created/changed?
+      timestamps()
     end
 
     # the email column of users contains only unique values
     create unique_index(:users, [:email])
   end
 end
+
 # To execute the migration and create the users table: mix ecto.migrate
 # To drop the db and execute the migrations: mix ecto.reset

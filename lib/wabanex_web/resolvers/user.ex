@@ -1,5 +1,4 @@
 defmodule WabanexWeb.Resolvers.User do
-
   alias Wabanex.Users.Get, as: GetUser
   alias Wabanex.Users.Create, as: CreateUser
 

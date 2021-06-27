@@ -1,5 +1,4 @@
 defmodule WabanexWeb.Resolvers.Training do
-
   alias Wabanex.Trainings.Create, as: CreateTraining
   alias Wabanex.Trainings.Get, as: GetTraining
 

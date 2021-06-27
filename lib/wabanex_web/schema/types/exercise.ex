@@ -1,9 +1,11 @@
 defmodule WabanexWeb.Schema.Types.Exercise do
   use Absinthe.Schema.Notation
 
-  @desc "Logic exercise representation" # Description
+  # Description
+  @desc "Logic exercise representation"
   object :exercise do
-    field :id, non_null(:uuid4) # Custom type
+    # Custom type
+    field :id, non_null(:uuid4)
     field :name, non_null(:string)
     field :youtube_video_url, non_null(:string)
     field :protocol_description, non_null(:string)

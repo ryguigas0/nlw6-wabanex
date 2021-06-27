@@ -12,8 +12,11 @@ defmodule Wabanex.IMC do
     data =
       content
       |> String.split("\n")
-      |> Enum.map(&parse_line/1) # Instead of fn line -> parse_line(line) end
-      |> Enum.into(%{}) # Parses the input as the argument type
+      # Instead of fn line -> parse_line(line) end
+      |> Enum.map(&parse_line/1)
+      # Parses the input as the argument type
+      |> Enum.into(%{})
+
     {:ok, data}
   end
 

@@ -1,7 +1,8 @@
 # Defining the User schema (data model and casting) module
 defmodule Wabanex.Training do
   use Ecto.Schema
-  import Ecto.Changeset # Validating data updates
+  # Validating data updates
+  import Ecto.Changeset
 
   alias Wabanex.{Exercise, User}
 
@@ -13,21 +14,25 @@ defmodule Wabanex.Training do
   @fields [:start_date, :end_date, :user_id]
 
   schema "trainings" do
-
     field :start_date, :date
     field :end_date, :date
 
-    belongs_to :user, User # One User has many trainings
-    has_many :exercises, Exercise # One training has many exercises
+    # One User has many trainings
+    belongs_to :user, User
+    # One training has many exercises
+    has_many :exercises, Exercise
 
     timestamps()
   end
 
   # Parse, validate the data and create a user
   def changeset(params) do
-    %__MODULE__{} # __MODULE__ === Wabanex.User
-    |> cast(params, @fields) # casts the values according to the fields
-    |> validate_required(@fields) # all the fields in the list are required
+    # __MODULE__ === Wabanex.User
+    %__MODULE__{}
+    # casts the values according to the fields
+    |> cast(params, @fields)
+    # all the fields in the list are required
+    |> validate_required(@fields)
     |> cast_assoc(:exercises)
   end
 end

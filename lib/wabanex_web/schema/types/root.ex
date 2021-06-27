@@ -12,32 +12,41 @@ defmodule WabanexWeb.Schema.Types.Root do
   alias Resolvers.Training, as: TrainingResolver
 
   # types imported here are imported everywhere
-  import_types Types.Custom.UUID4  # import custom types
+  # import custom types
+  import_types(Types.Custom.UUID4)
   import_types(Types.User)
   import_types(Types.Training)
 
   object :root_query do
-    field :get_user, type: :user do # "get route"
+    # "get route"
+    field :get_user, type: :user do
       # what is needed to get an user
-      arg :id, non_null(:uuid4) # imported with the User type
+      # imported with the User type
+      arg(:id, non_null(:uuid4))
 
       # how can you get what was queried?
-      resolve &UserResolver.get/2 # the same as: fn params, context -> UserResolver.get(params, context) end
+      # the same as: fn params, context -> UserResolver.get(params, context) end
+      resolve(&UserResolver.get/2)
     end
   end
 
   object :root_mutation do
     field :create_user, type: :user do
-      arg :input, non_null(:create_user_input) # needs an input to create an user
+      # needs an input to create an user
+      arg(:input, non_null(:create_user_input))
 
-      resolve &UserResolver.create/2
-      middleware TranslateErrors # Error translation middleware
+      resolve(&UserResolver.create/2)
+      # Error translation middleware
+      middleware(TranslateErrors)
     end
-    field :create_training, type: :training do
-      arg :input, non_null(:create_training_input) # needs an input to create an user
 
-      resolve &TrainingResolver.create/2
-      middleware TranslateErrors # Error translation middleware
+    field :create_training, type: :training do
+      # needs an input to create an user
+      arg(:input, non_null(:create_training_input))
+
+      resolve(&TrainingResolver.create/2)
+      # Error translation middleware
+      middleware(TranslateErrors)
     end
   end
 end

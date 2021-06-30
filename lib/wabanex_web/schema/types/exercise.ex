@@ -18,4 +18,12 @@ defmodule WabanexWeb.Schema.Types.Exercise do
     field :protocol_description, non_null(:string)
     field :repetitions, non_null(:string)
   end
+
+  @desc "Exercise data update input"
+  input_object :update_exercise_input do
+    field :name, non_null(:string)
+    field :repetitions, :string
+    field :youtube_video_url, :string
+    field :protocol_description, :string
+  end
 end

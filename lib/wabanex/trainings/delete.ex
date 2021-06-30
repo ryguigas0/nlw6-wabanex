@@ -10,14 +10,18 @@ defmodule Wabanex.Trainings.Delete do
   end
 
   def delete_training({:ok, uuid}) do
-    query = from e in Exercise, where: e.training_id == ^uuid
-    Repo.delete_all(query)
-
     training_to_delete = Repo.get(Training, uuid)
 
-    case Repo.delete(training_to_delete) do
-      nil -> {:error, "Training not found"}
-      {:ok, _training} -> "Training deleted!"
+    if training_to_delete == nil do
+      {:error, nil}
+    else
+      query = from e in Exercise, where: e.training_id == ^uuid
+      Repo.delete_all(query)
+
+      case Repo.delete(training_to_delete) do
+        nil -> {:error, nil}
+        {:ok, training} -> {:ok, training}
+      end
     end
   end
 end
